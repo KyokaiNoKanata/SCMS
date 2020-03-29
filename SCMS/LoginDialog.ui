@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginDialogClass</class>
+ <widget class="QDialog" name="LoginDialogClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>407</width>
+    <height>427</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>LoginDialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>用户名</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEdit</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>密码</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEdit_2</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_2">
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QRadioButton" name="radioButton">
+     <property name="text">
+      <string>学生</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QRadioButton" name="radioButton_2">
+     <property name="text">
+      <string>管理员</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>登录</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>注册</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="LoginDialog.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>LoginDialogClass</receiver>
+   <slot>Login()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>353</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>60</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>LoginDialogClass</receiver>
+   <slot>Register()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>342</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>94</x>
+     <y>372</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>Login()</slot>
+  <slot>Register()</slot>
+ </slots>
+</ui>

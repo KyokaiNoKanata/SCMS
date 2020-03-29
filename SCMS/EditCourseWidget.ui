@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>EditCourseWidgetClass</class>
+ <widget class="QWidget" name="EditCourseWidgetClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>更改任课教师</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLineEdit" name="lineEdit_3"/>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLineEdit" name="lineEdit_2"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="text">
+      <string>更改最大人数</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>pushButton_3</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>EditCourseWidgetClass</receiver>
+   <slot>ChangeTeacher()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>390</x>
+     <y>107</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>275</x>
+     <y>142</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>EditCourseWidgetClass</receiver>
+   <slot>ChangeMaxNumber()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>390</x>
+     <y>212</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>283</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ChangeCourseName()</slot>
+  <slot>ChangeMaxNumber()</slot>
+  <slot>ChangeTeacher()</slot>
+  <slot>ChangeCourseType()</slot>
+ </slots>
+</ui>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StudentOwnCourseWidgetClass</class>
+ <widget class="QWidget" name="StudentOwnCourseWidgetClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>447</width>
+    <height>306</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="4">
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="text">
+      <string>退出</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="text">
+      <string>选择助教</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>报名助教</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>退课</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="text">
+      <string>刷新</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="5">
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="dragEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="showGrid">
+      <bool>false</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>false</bool>
+     </property>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>课程编号</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>课程名</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>任课教师</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>课程类型</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>个人助教</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentOwnCourseWidgetClass</receiver>
+   <slot>AssistantApply()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>176</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>122</x>
+     <y>566</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentOwnCourseWidgetClass</receiver>
+   <slot>DeleteCourse()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>350</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>291</x>
+     <y>565</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentOwnCourseWidgetClass</receiver>
+   <slot>SelectAssistant()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>263</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>562</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentOwnCourseWidgetClass</receiver>
+   <slot>Exit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>437</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>560</x>
+     <y>356</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentOwnCourseWidgetClass</receiver>
+   <slot>Refresh()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>69</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>AssistantApply()</slot>
+  <slot>DeleteCourse()</slot>
+  <slot>SelectAssistant()</slot>
+  <slot>Exit()</slot>
+  <slot>TableDiaplay()</slot>
+  <slot>Refresh()</slot>
+ </slots>
+</ui>
