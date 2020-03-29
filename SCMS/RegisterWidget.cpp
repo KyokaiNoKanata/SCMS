@@ -14,8 +14,11 @@ void RegisterWidget::Register() {
 			key.AddToKeyring(ui.lineEdit->text(), ui.lineEdit_2->text());
 			key.WriteFile();
 			QFile file("../data/" + ui.lineEdit->text() + ".txt");
+			QFile file_2("../data/jw" + ui.lineEdit->text() + ".txt");
 			file.open(QIODevice::WriteOnly | QIODevice::Text);
+			file_2.open(QIODevice::WriteOnly | QIODevice::Text);
 			file.close();
+			file_2.close();
 			QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("注册成功"));
 			this->close();
 		}

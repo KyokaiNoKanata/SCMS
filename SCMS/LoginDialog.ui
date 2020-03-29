@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>407</width>
-    <height>427</height>
+    <width>279</width>
+    <height>177</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>LoginDialog</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QFormLayout" name="formLayout_3">
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -24,7 +24,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="1" colspan="2">
+   <item row="0" column="1">
     <widget class="QLineEdit" name="lineEdit"/>
    </item>
    <item row="1" column="0">
@@ -37,38 +37,84 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1" colspan="2">
+   <item row="1" column="1">
     <widget class="QLineEdit" name="lineEdit_2">
      <property name="echoMode">
       <enum>QLineEdit::Password</enum>
      </property>
     </widget>
    </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>身份选择</string>
+     </property>
+    </widget>
+   </item>
    <item row="2" column="1">
-    <widget class="QRadioButton" name="radioButton">
-     <property name="text">
-      <string>学生</string>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
      </property>
-    </widget>
-   </item>
-   <item row="2" column="2">
-    <widget class="QRadioButton" name="radioButton_2">
-     <property name="text">
-      <string>管理员</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1" colspan="2">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>登录</string>
-     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton">
+        <property name="text">
+         <string>学生</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="radioButton_2">
+        <property name="text">
+         <string>管理员</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item row="3" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>模式选择</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_3">
+        <property name="text">
+         <string>题设模式</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="radioButton_4">
+        <property name="text">
+         <string>教务网模式</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0">
     <widget class="QPushButton" name="pushButton_2">
      <property name="text">
-      <string>注册</string>
+      <string>学生注册</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>登录</string>
      </property>
     </widget>
    </item>
@@ -86,8 +132,8 @@
    <slot>Login()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>333</x>
-     <y>353</y>
+     <x>414</x>
+     <y>167</y>
     </hint>
     <hint type="destinationlabel">
      <x>60</x>
@@ -102,8 +148,8 @@
    <slot>Register()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>84</x>
-     <y>342</y>
+     <x>83</x>
+     <y>167</y>
     </hint>
     <hint type="destinationlabel">
      <x>94</x>

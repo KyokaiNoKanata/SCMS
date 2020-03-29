@@ -13,24 +13,24 @@ bool Course::isCompulsory() {
 }
 
 void Course::AddStudent(QString student) {
-	MemberList.insert(student);
+	MemberSet.insert(student);
 	Refresh();
 }
 
 void Course::DeleteStudent(QString student) {
-	MemberList.erase(student);
+	MemberSet.erase(student);
 	Refresh();
 }
 
 void Course::Refresh() {
-	CN = MemberList.size();
+	CN = MemberSet.size();
 	CurrentNumber = QString::number(CN);
 }
 
 QString Course::getMember() {
-	if (!MemberList.size())return "Null";
+	if (!MemberSet.size())return "Null";
 	QStringList qsl;
-	for (set<QString>::iterator it = MemberList.begin();it != MemberList.end();it++) {
+	for (set<QString>::iterator it = MemberSet.begin();it != MemberSet.end();it++) {
 		qsl.push_back(*it);
 	}
 	QString qs = qsl[0];

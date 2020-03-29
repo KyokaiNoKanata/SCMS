@@ -4,6 +4,7 @@
 #include<set>
 #include<map>
 
+#include "qchar.h"
 #include "qstring.h"
 #include  "qstringlist.h"
 
@@ -14,24 +15,38 @@ using namespace std;
 class Course {
 public:
 	int ID;
+	QString JWID;
 	QString Name;
-	QString Teacher;
 	QString Type;
 	QString CurrentNumber;
 	QString MaxNumber;
 	QString AssistantQS;
 	QString PersonalAssistant;
+	QString TimeQS;
+	QString WeekQS;
+	QString Place;
+	QString College;
+	QString Score;
+	QString Hour;
+	QString Campus;
+	QString Teacher;
+	QString JWTeacherQS;
+	QStringList JWTeacher;
+	QStringList TPWList;
+	QStringList JWName;
 	QStringList Assistant;
+	QStringList Time;
+	QStringList Week;
 	int CN;
 	int MN;
 	bool isFull();
-	bool isCompulsory();
-	void Refresh();
-	void DeleteStudent(QString student);
 	void AddStudent(QString student);
+	void DeleteStudent(QString student);
 	bool operator<(const Course& course)const;
 	QString getMember();
+	set<QString>MemberSet;
 
 private:
-	set<QString>MemberList;
+	void Refresh();
+	bool isCompulsory();
 };

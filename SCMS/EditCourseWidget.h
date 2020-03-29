@@ -14,7 +14,7 @@ public:
 private slots:
 	void ChangeTeacher();
 	void ChangeMaxNumber();;
-	void CourseEdit(int mode, QString qs);
+	void CourseEdit(bool cmode, QString qs);
 
 private:
 	Ui::EditCourseWidgetClass ui;

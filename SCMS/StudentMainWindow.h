@@ -13,7 +13,7 @@
 class StudentMainWindow :public QMainWindow {
 	Q_OBJECT
 public:
-	StudentMainWindow(QString student, QMainWindow* parent = Q_NULLPTR);
+	explicit StudentMainWindow(bool mode, QString student, QMainWindow* parent = Q_NULLPTR);
 	void AssistantExitJudge();
 
 private slots:

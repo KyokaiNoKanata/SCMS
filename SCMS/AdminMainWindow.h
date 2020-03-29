@@ -22,7 +22,7 @@ using namespace std;
 class AdminMainWindow :public QMainWindow {
 	Q_OBJECT
 public:
-	explicit AdminMainWindow(QMainWindow* parent = Q_NULLPTR);
+	explicit AdminMainWindow(bool mode, QMainWindow* parent = Q_NULLPTR);
 
 private slots:
 	void InputCourse();

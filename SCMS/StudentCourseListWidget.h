@@ -11,8 +11,10 @@
 class StudentCourseListWidget :public QWidget {
 	Q_OBJECT
 public:
-	explicit StudentCourseListWidget(QString student, QWidget* parent = Q_NULLPTR);
-	void TableDisplay();
+	explicit StudentCourseListWidget(bool mode, QString student, QWidget* parent = Q_NULLPTR);
+	void TableDisplay(bool mode);
+	void NTableDisplay();
+	void JWTableDisplay();
 
 private slots:
 	void SelectCourse(QString student);

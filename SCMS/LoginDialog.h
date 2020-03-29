@@ -16,9 +16,9 @@ public:
 
 public slots:
 	void Login();
-	void StudentLogin();
+	void StudentLogin(bool mode);
 	void Register();
-	void AdminLogin();
+	void AdminLogin(bool mode);
 
 protected:
 	Ui::LoginDialogClass ui;

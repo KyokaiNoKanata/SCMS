@@ -2,10 +2,10 @@
 
 int row;
 
-void EditCourseWidget::CourseEdit(int mode, QString qs) {
+void EditCourseWidget::CourseEdit(bool cmode, QString qs) {
 	CourseManage cm;
-	cm.ReadCourse();
-	cm.ChangeNth(row, mode, qs);
+	cm.ReadFile(0);
+	cm.ChangeNth(row, cmode, qs);
 }
 
 EditCourseWidget::EditCourseWidget(int n, QWidget* parent) :QWidget(parent) {
@@ -14,9 +14,9 @@ EditCourseWidget::EditCourseWidget(int n, QWidget* parent) :QWidget(parent) {
 }
 
 void EditCourseWidget::ChangeTeacher() {
-	CourseEdit(2, ui.lineEdit_2->text());
+	CourseEdit(0, ui.lineEdit_2->text());
 }
 
 void EditCourseWidget::ChangeMaxNumber() {
-	CourseEdit(3, ui.lineEdit_3->text());
+	CourseEdit(1, ui.lineEdit_3->text());
 }

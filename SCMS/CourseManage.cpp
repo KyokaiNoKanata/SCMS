@@ -1,6 +1,15 @@
 #include "CourseManage.h"
 
-void CourseManage::InputCourse(QString path) {
+void CourseManage::InputCourse(bool mode, QString path) {
+	if (!mode) {
+		NInputCourse(path);
+	}
+	else {
+		JWInputCourse(path);
+	}
+}
+
+void CourseManage::NInputCourse(QString path) {
 	QFile file(path);
 	file.open(QIODevice::ReadOnly | QIODevice::Text);
 	QTextStream in(&file);
@@ -8,20 +17,85 @@ void CourseManage::InputCourse(QString path) {
 		QStringList qsl = in.readLine().split('\t');
 		Course course;
 		course.ID = qsl[0].toInt();
-		if (qsl.length() > 1)course.Name = qsl[1];
-		if (qsl.length() > 2)course.Teacher = qsl[2];
-		if (qsl.length() > 3) {
-			course.MaxNumber = qsl[3];
-			course.MN = qsl[3].toInt();
-			course.CurrentNumber = "0";
-			course.CN = 0;
-		}
+		course.Name = qsl[1];
+		course.Teacher = qsl[2];
+		course.MaxNumber = qsl[3];
+		course.MN = qsl[3].toInt();
+		course.CurrentNumber = "0";
+		course.CN = 0;
 		if (qsl.length() > 5)course.Type = qsl[5];
-		CourseList.insert(course);
+		CourseSet.insert(course);
+	}
+	file.close();
+}
+
+void CourseManage::JWInputCourse(QString path) {
+	QFile file(path);
+	file.open(QIODevice::ReadOnly | QIODevice::Text);
+	QTextStream in(&file);
+	while (!in.atEnd()) {
+		QStringList qsl = in.readLine().split('\t');
+		Course course;
+		course.JWID = qsl[0];
+		int i = 1;
+		while (!isType(qsl[i])) {
+			course.JWName.push_back(qsl[i++]);
+		}
+		course.Type = qsl[i++];
+		if (!qsl[i][0].isNumber()) {
+			course.College = qsl[i++];
+		}
+		course.Score = qsl[i++];
+		course.Hour = qsl[i++];
+		if (qsl.size() < i) {
+			continue;
+		}
+		else {
+			course.Campus = qsl[i++];
+			course.JWTeacherQS = qsl[i++];
+			while (i < qsl.size()) {
+				course.TPWList.push_back(qsl[i++]);
+			}
+		}
+		CourseSet.insert(course);
+	}
+	file.close();
+}
+
+bool CourseManage::isType(QString qs) {
+	return qs == QString::fromLocal8Bit("通修") || qs == QString::fromLocal8Bit("核心") || qs == QString::fromLocal8Bit("选修");
+}
+
+void CourseManage::WriteFile(bool mode) {
+	if (!mode) {
+		NWriteFile();
+	}
+	else {
+		JWWriteFile();
 	}
 }
 
-void CourseManage::ReadCourse() {
+bool CourseManage::isCH(QChar qc) {
+	ushort uni = qc.unicode();
+	if (uni >= 0x4E00 && uni <= 0x9FA5)
+	{
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+void CourseManage::ReadFile(bool mode) {
+	if (!mode) {
+		NReadFile();
+	}
+	else {
+		JWReadCourse();
+	}
+}
+
+void CourseManage::NReadFile() {
 	QFile file("../data/course.txt");
 	QFile file_2("../data/assistant.txt");
 	QFile file_3("../data/member.txt");
@@ -52,14 +126,70 @@ void CourseManage::ReadCourse() {
 				}
 			}
 		}
-		CourseList.insert(course);
+		CourseSet.insert(course);
 	}
 	file.close();
 	file_2.close();
 	file_3.close();
 }
 
-void CourseManage::WriteCourse() {
+void CourseManage::JWReadCourse() {
+	QFile file("../data/jwcourse.txt");
+	QFile file_2("../data/jwassistant.txt");
+	QFile file_3("../data/jwmember.txt");
+	file.open(QIODevice::ReadOnly | QIODevice::Text);
+	file_2.open(QIODevice::ReadOnly | QIODevice::Text);
+	file_3.open(QIODevice::ReadOnly | QIODevice::Text);
+	QTextStream in(&file);
+	QTextStream in_2(&file_2);
+	QTextStream in_3(&file_3);
+	while (!in.atEnd()) {
+		QStringList qsl = in.readLine().split('\t');
+		QTextStream in(&file);
+		Course course;
+		course.JWID = qsl[0];
+		int i = 1;
+		while (!isType(qsl[i])) {
+			course.JWName.push_back(qsl[i++]);
+		}
+		course.Type = qsl[i++];
+		if (!qsl[i][0].isNumber()) {
+			course.College = qsl[i++];
+		}
+		course.Score = qsl[i++];
+		course.Hour = qsl[i++];
+		if (qsl.size() < i) {
+			continue;
+		}
+		else {
+			course.Campus = qsl[i++];
+			course.JWTeacherQS = qsl[i++];
+			while (i < qsl.size()) {
+				course.TPWList.push_back(qsl[i++]);
+			}
+		}
+		qsl = in_2.readLine().split('\t');
+		course.AssistantQS = qsl[1];
+		if (course.AssistantQS != "Null") {
+			course.Assistant = course.AssistantQS.split(',');
+		}
+		if (!in_3.atEnd()) {
+			qsl = in_3.readLine().split('\t');
+			if (qsl[1] != "Null") {
+				QStringList qsl_2 = qsl[1].split(',');
+				for (QStringList::iterator it = qsl_2.begin();it != qsl_2.end();it++) {
+					course.AddStudent(*it);
+				}
+			}
+		}
+		CourseSet.insert(course);
+	}
+	file.close();
+	file_2.close();
+	file_3.close();
+}
+
+void CourseManage::NWriteFile() {
 	QFile file("../data/course.txt");
 	QFile file_2("../data/assistant.txt");
 	QFile file_3("../data/member.txt");
@@ -69,7 +199,7 @@ void CourseManage::WriteCourse() {
 	QTextStream out(&file);
 	QTextStream out_2(&file_2);
 	QTextStream out_3(&file_3);
-	for (set<Course>::iterator it = CourseList.begin();it != CourseList.end();it++) {
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++) {
 		out << QString("%1").arg(it->ID, 3, 10, QLatin1Char('0')) << '\t' << it->Name << '\t' << it->Teacher << '\t' << (it->MaxNumber.isEmpty() ? it->MaxNumber : QString::number(it->MN)) << '\t' << (it->MaxNumber.isEmpty() ? it->CurrentNumber : QString::number(it->CN)) << '\t' << it->Type << endl;
 		out_2 << QString("%1").arg(it->ID, 3, 10, QLatin1Char('0')) << '\t';
 		if (!it->Assistant.isEmpty()) {
@@ -85,9 +215,42 @@ void CourseManage::WriteCourse() {
 	file_3.close();
 }
 
+void CourseManage::JWWriteFile() {
+	QFile file("../data/jwcourse.txt");
+	QFile file_2("../data/jwassistant.txt");
+	QFile file_3("../data/jwmember.txt");
+	file.open(QIODevice::WriteOnly | QIODevice::Text);
+	file_2.open(QIODevice::WriteOnly | QIODevice::Text);
+	file_3.open(QIODevice::WriteOnly | QIODevice::Text);
+	QTextStream out(&file);
+	QTextStream out_2(&file_2);
+	QTextStream out_3(&file_3);
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++) {
+		out << it->JWID << '\t' << it->Name << '\t' << it->College << '\t' << it->Score << '\t' << it->Hour << '\t' << it->Campus << it->JWTeacherQS;
+		for (int i = 0;i < it->TPWList.size();i++) {
+			out << it->TPWList[i];
+			if (i != it->TPWList.size() - 1) {
+				out << ' ';
+			}
+		}
+		out_2 << QString("%1").arg(it->ID, 3, 10, QLatin1Char('0')) << '\t';
+		if (!it->Assistant.isEmpty()) {
+			out_2 << it->AssistantQS << endl;
+		}
+		else {
+			out_2 << "Null" << endl;
+		}
+		out_3 << QString("%1").arg(it->ID, 3, 10, QLatin1Char('0')) << '\t' << const_cast<Course&>(*it).getMember() << endl;
+	}
+	file.close();
+	file_2.close();
+	file_3.close();
+}
+
+
 void CourseManage::AddCourse(QString Name, QString Teacher, QString MaxNumber, QString Type) {
 	Course course;
-	set<Course>::iterator it = getNth(CourseList.size());
+	set<Course>::iterator it = getNth(CourseSet.size());
 	it--;
 	course.ID = it->ID + 1;
 	course.Name = Name;
@@ -95,39 +258,34 @@ void CourseManage::AddCourse(QString Name, QString Teacher, QString MaxNumber, Q
 	course.MN = (course.MaxNumber = MaxNumber).toInt();
 	if (!MaxNumber.isEmpty())course.CN = (course.CurrentNumber = "0").toInt();
 	course.Type = Type;
-	CourseList.insert(course);
+	CourseSet.insert(course);
 }
 
 void CourseManage::RemoveNth(int n) {
 	set<Course>::iterator it = getNth(n);
-	CourseList.erase(it);
+	CourseSet.erase(it);
 }
 
-void CourseManage::ChangeNth(int n, int mode, QString qs) {
+void CourseManage::ChangeNth(int n, bool cmode, QString qs) {
 	set<Course>::iterator it = getNth(n);
-	Change(it, mode, qs);
+	Change(it, cmode, qs);
 }
 
-void CourseManage::Change(set<Course>::iterator it, int mode, QString qs) {
-	switch (mode) {
-	case 2:
+void CourseManage::Change(set<Course>::iterator it, bool cmode, QString qs) {
+	switch (cmode) {
+	case 0:
 		const_cast<Course&>(*it).Teacher = qs;
 		break;
-	case 3:
+	case 1:
 		const_cast<Course&>(*it).MN = (const_cast<Course&>(*it).MaxNumber = qs).toInt();
 		break;
 	}
-	WriteCourse();
-}
-
-set<Course> CourseManage::getList() {
-	return CourseList;
 }
 
 set<Course>::iterator CourseManage::getNth(int n) {
 	int i = 0;
 	set<Course>::iterator it;
-	for (it = CourseList.begin();i < n && it != CourseList.end();it++, i++);
+	for (it = CourseSet.begin();i < n && it != CourseSet.end();it++, i++);
 	return it;
 }
 
@@ -140,7 +298,25 @@ void CourseManage::AddToNth(int n, QString student) {
 	const_cast<Course&>(*it).AddStudent(student);
 }
 
-void CourseManage::ReadStudentFile(QString ID) {
+void CourseManage::ReadStudentFile(bool mode, QString student) {
+	if (!mode) {
+		NReadStudentFile(student);
+	}
+	else {
+		JWReadStudentFile(student);
+	}
+}
+
+void CourseManage::WriteStudentFile(bool mode, QString student) {
+	if (!mode) {
+		NWriteStudentFile(student);
+	}
+	else {
+		JWWriteStudentFile(student);
+	}
+}
+
+void CourseManage::NReadStudentFile(QString ID) {
 	QFile file("../data/" + ID + ".txt");
 	file.open(QIODevice::ReadOnly | QIODevice::Text);
 	QTextStream in(&file);
@@ -152,31 +328,76 @@ void CourseManage::ReadStudentFile(QString ID) {
 		course.Teacher = qsl[2];
 		course.Type = qsl[3];
 		course.PersonalAssistant = qsl[4];
-		CourseList.insert(course);
+		CourseSet.insert(course);
 	}
 	file.close();
 }
 
-void CourseManage::WriteStudentFile(QString ID) {
+void CourseManage::JWReadStudentFile(QString ID) {
+	QFile file("../data/jw" + ID + ".txt");
+	file.open(QIODevice::ReadOnly | QIODevice::Text);
+	QTextStream in(&file);
+	while (!in.atEnd()) {
+		QStringList qsl = in.readLine().split('\t');
+		Course course;
+		course.JWID = qsl[0];
+		int i = 1;
+		while (!isType(qsl[i])) {
+			course.JWName.push_back(qsl[i++]);
+		}
+		course.Type = qsl[i++];
+		if (!qsl[i][0].isNumber()) {
+			course.College = qsl[i++];
+		}
+		course.Score = qsl[i++];
+		course.Hour = qsl[i++];
+		if (qsl.size() < i) {
+			continue;
+		}
+		else {
+			course.Campus = qsl[i++];
+			course.Teacher = qsl[i++];
+			while (i < qsl.size()) {
+				course.TPWList.push_back(qsl[i++]);
+			}
+		}
+		CourseSet.insert(course);
+	}
+	file.close();
+}
+
+void CourseManage::NWriteStudentFile(QString ID) {
 	QFile file("../data/" + ID + ".txt");
 	file.open(QIODevice::WriteOnly | QIODevice::Text);
 	QTextStream out(&file);
-	for (set<Course>::iterator it = CourseList.begin();it != CourseList.end();it++) {
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++) {
 		out << QString("%1").arg(it->ID, 3, 10, QLatin1Char('0')) << '\t' << it->Name << '\t' << it->Teacher << '\t' << it->Type << '\t' << it->PersonalAssistant << endl;
 	}
 	file.close();
 }
 
-void CourseManage::InsertCourse(Course course) {
-	CourseList.insert(course);
+void CourseManage::JWWriteStudentFile(QString ID) {
+	QFile file("../data/jw" + ID + ".txt");
+	file.open(QIODevice::WriteOnly | QIODevice::Text);
+	QTextStream out(&file);
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++) {
+		out << it->JWID << '\t' << it->Name << '\t' << it->College << '\t' << it->Score << '\t' << it->Hour << '\t' << it->Campus << it->JWTeacherQS;
+		for (int i = 0;i < it->TPWList.size();i++) {
+			out << it->TPWList[i];
+			if (i != it->TPWList.size() - 1) {
+				out << ' ';
+			}
+		}
+	}
+	file.close();
 }
 
-bool CourseManage::Exist(Course course) {
-	return CourseList.count(course);
+void CourseManage::InsertCourse(Course course) {
+	CourseSet.insert(course);
 }
 
 bool CourseManage::AddAssistant(QString student, Course course) {
-	set<Course>::iterator it = CourseList.find(course);
+	set<Course>::iterator it = CourseSet.find(course);
 	if (it->Assistant.count(student)) {
 		return 0;
 	}
@@ -193,50 +414,60 @@ bool CourseManage::AddAssistant(QString student, Course course) {
 }
 
 void CourseManage::SetAssistant(QString student, Course course) {
-	const_cast<Course&>(*CourseList.find(course)).PersonalAssistant = student;
+	const_cast<Course&>(*CourseSet.find(course)).PersonalAssistant = student;
 }
 
 int CourseManage::TotalCount() {
-	return CourseList.size();
+	return CourseSet.size();
 }
 
 int CourseManage::CompulsoryCount() {
 	int n = 0;
-	for (set<Course>::iterator it = CourseList.begin();it != CourseList.end();it++) {
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++) {
 		if (it->Type == "专业课")n++;
 	}
 	return n;
 }
 
 void CourseManage::RemoveFromCourse(QString student, Course course) {
-	const_cast<Course&>(*CourseList.find(course)).DeleteStudent(student);
+	const_cast<Course&>(*CourseSet.find(course)).DeleteStudent(student);
 }
 
 bool CourseManage::CourseCheck() {
 	return (TotalCount() - CompulsoryCount() >= 2 && CompulsoryCount() >= 2);
 }
 
-bool CourseManage::isAssistant(QString student, Course course) {
-	return const_cast<Course&>(*CourseList.find(course)).AssistantQS.contains(student);
-}
-
 void CourseManage::RemoveAssistant(QString student, Course course) {
-	const_cast<Course&>(*CourseList.find(course)).Assistant.removeAll(student);
-	QStringList qsl = const_cast<Course&>(*CourseList.find(course)).Assistant;
+	const_cast<Course&>(*CourseSet.find(course)).Assistant.removeAll(student);
+	QStringList qsl = const_cast<Course&>(*CourseSet.find(course)).Assistant;
 	QString qs;
 	int s = qsl.size();
 	for (int i = 0;i < s;i++) {
 		if (!i)qs = qsl[i];
 		else qs += ("," + qsl[i]);
 	}
-	const_cast<Course&>(*CourseList.find(course)).AssistantQS = qs;
+	const_cast<Course&>(*CourseSet.find(course)).AssistantQS = qs;
 }
 
 bool CourseManage::NameExist(QString Name) {
-	for (set<Course>::iterator it = CourseList.begin();it != CourseList.end();it++) {
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++) {
 		if (it->Name == Name) {
 			return 1;
 		}
 	}
 	return 0;
+}
+
+bool CourseManage::ApplyCheck(QString student) {
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++) {
+		if (it->AssistantQS.contains(student)) {
+			if (!ApplyCount.count(student)) {
+				ApplyCount[student] = 1;
+			}
+			else {
+				ApplyCount[student]++;
+			}
+		}
+	}
+	return ApplyCount[student] < 2;
 }

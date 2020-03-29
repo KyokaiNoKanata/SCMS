@@ -11,7 +11,7 @@
 class AdminCourseListWidget :public QWidget {
 	Q_OBJECT
 public:
-	explicit AdminCourseListWidget(QWidget* parent = Q_NULLPTR);
+	explicit AdminCourseListWidget(bool mode, QWidget* parent = Q_NULLPTR);
 	void TableDisplay();
 
 private slots:

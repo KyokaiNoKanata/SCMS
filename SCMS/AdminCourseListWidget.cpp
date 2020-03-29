@@ -1,17 +1,20 @@
 #include "AdminCourseListWidget.h"
 
-AdminCourseListWidget::AdminCourseListWidget(QWidget* parent) :QWidget(parent) {
+bool am_2;
+
+AdminCourseListWidget::AdminCourseListWidget(bool mode, QWidget* parent) :QWidget(parent) {
+	am_2 = mode;
 	ui.setupUi(this);
 	TableDisplay();
 }
 
 void AdminCourseListWidget::TableDisplay() {
 	CourseManage cm;
-	cm.ReadCourse();
-	set<Course>CourseList = cm.getList();
-	ui.tableWidget->setRowCount(CourseList.size());
+	cm.ReadFile(am_2);
+	set<Course>CourseSet = cm.CourseSet;
+	ui.tableWidget->setRowCount(CourseSet.size());
 	int CurrentRow = 0;
-	for (set<Course>::iterator it = CourseList.begin();it != CourseList.end();it++, CurrentRow++) {
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++, CurrentRow++) {
 		ui.tableWidget->setItem(CurrentRow, 0, new QTableWidgetItem(QString("%1").arg(it->ID, 3, 10, QLatin1Char('0'))));
 		ui.tableWidget->setItem(CurrentRow, 1, new QTableWidgetItem(it->Name));
 		ui.tableWidget->setItem(CurrentRow, 2, new QTableWidgetItem(it->Teacher));
@@ -30,12 +33,12 @@ void AdminCourseListWidget::AddCourse() {
 
 void AdminCourseListWidget::DeleteCourse() {
 	CourseManage cm;
-	cm.ReadCourse();
+	cm.ReadFile(am_2);
 	int CurrentRow = ui.tableWidget->currentRow();
 	Course course = cm.getNthCourse(CurrentRow);
 	if (!course.CN) {
 		cm.RemoveNth(CurrentRow);
-		cm.WriteCourse();
+		cm.WriteFile(am_2);
 		TableDisplay();
 	}
 	else {
@@ -58,7 +61,7 @@ void AdminCourseListWidget::Exit() {
 
 void AdminCourseListWidget::VerifiedInfo() {
 	CourseManage cm;
-	cm.ReadCourse();
+	cm.ReadFile(am_2);
 	Course course = cm.getNthCourse(ui.tableWidget->currentRow());
 	ui.tableWidget_2->setItem(0, 0, new QTableWidgetItem(QString("%1").arg(course.ID, 3, 10, QLatin1Char('0'))));
 	ui.tableWidget_2->setItem(1, 0, new QTableWidgetItem(course.Name));
