@@ -36,7 +36,6 @@ public:
 	bool NameExist(QString Name);
 	bool ApplyCheck(QString student);
 	bool CourseCheck();
-	bool isType(QString qs);
 	Course getNthCourse(int n);
 	set<Course>CourseSet;
 
@@ -46,13 +45,15 @@ private:
 	void NWriteFile();
 	void JWWriteFile();
 	void NReadFile();
-	void JWReadCourse();
+	void JWReadFile();
 	void NWriteStudentFile(QString ID);
 	void JWWriteStudentFile(QString ID);
 	void NReadStudentFile(QString ID);
 	void JWReadStudentFile(QString ID);
-	bool isCH(QChar qc);
 	void Change(set<Course>::iterator it, bool mode, QString qs);
+	bool isType(QString qs);
+	bool isCampus(QString qs);
+	bool isTPW(QString qs);
 	map<QString, int>ApplyCount;
 	set<Course>::iterator getNth(int n);
 };

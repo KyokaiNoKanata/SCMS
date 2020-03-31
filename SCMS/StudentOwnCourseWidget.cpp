@@ -6,11 +6,13 @@ bool sm_3;
 StudentOwnCourseWidget::StudentOwnCourseWidget(bool mode, QString student, QWidget* parent) :QWidget(parent) {
 	ui.setupUi(this);
 	stu_3 = student;
-	TableDisplay(mode);
+	sm_3 = mode;
+	TableDisplay();
 }
 
-void StudentOwnCourseWidget::TableDisplay(bool mode) {
-	if (!mode) {
+
+void StudentOwnCourseWidget::TableDisplay() {
+	if (!sm_3) {
 		NTableDisplay();
 	}
 	else {
@@ -19,9 +21,9 @@ void StudentOwnCourseWidget::TableDisplay(bool mode) {
 }
 
 void StudentOwnCourseWidget::NTableDisplay() {
-	CourseManage scm;
-	scm.ReadStudentFile(sm_3, stu_3);
-	set<Course>CourseSet = scm.CourseSet;
+	CourseManage cm;
+	cm.ReadStudentFile(sm_3, stu_3);
+	set<Course>CourseSet = cm.CourseSet;
 	ui.tableWidget->setRowCount(CourseSet.size());
 	int CurrentRow = 0;
 	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++, CurrentRow++) {
@@ -35,7 +37,28 @@ void StudentOwnCourseWidget::NTableDisplay() {
 }
 
 void StudentOwnCourseWidget::JWTableDisplay() {
-
+	CourseManage cm;
+	cm.ReadStudentFile(sm_3, stu_3);
+	set<Course>CourseSet = cm.CourseSet;
+	ui.tableWidget->setColumnCount(10);
+	ui.tableWidget->setRowCount(CourseSet.size());
+	QStringList qsl;
+	qsl << QString::fromLocal8Bit("课程编号") << QString::fromLocal8Bit("课程名称") << QString::fromLocal8Bit("性质") << QString::fromLocal8Bit("开课院系") << QString::fromLocal8Bit("学分") << QString::fromLocal8Bit("学时") << QString::fromLocal8Bit("校区") << QString::fromLocal8Bit("教师") << QString::fromLocal8Bit("上课时间及地点") << QString::fromLocal8Bit("个人助教");
+	ui.tableWidget->setHorizontalHeaderLabels(qsl);
+	int CurrentRow = 0;
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++, CurrentRow++) {
+		ui.tableWidget->setItem(CurrentRow, 0, new QTableWidgetItem(it->JWID));
+		ui.tableWidget->setItem(CurrentRow, 1, new QTableWidgetItem(it->Name));
+		ui.tableWidget->setItem(CurrentRow, 2, new QTableWidgetItem(it->Type));
+		ui.tableWidget->setItem(CurrentRow, 3, new QTableWidgetItem(it->College));
+		ui.tableWidget->setItem(CurrentRow, 4, new QTableWidgetItem(it->Score));
+		ui.tableWidget->setItem(CurrentRow, 5, new QTableWidgetItem(it->Hour));
+		ui.tableWidget->setItem(CurrentRow, 6, new QTableWidgetItem(it->Campus));
+		ui.tableWidget->setItem(CurrentRow, 7, new QTableWidgetItem(it->Teacher));
+		ui.tableWidget->setItem(CurrentRow, 8, new QTableWidgetItem(it->TPWQS));
+		ui.tableWidget->setItem(CurrentRow, 8, new QTableWidgetItem(it->PersonalAssistant));
+	}
+	ui.tableWidget->resizeColumnsToContents();
 }
 
 void StudentOwnCourseWidget::DeleteCourse() {
@@ -52,7 +75,7 @@ void StudentOwnCourseWidget::DeleteCourse() {
 	cm.WriteFile(sm_3);
 	QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("退课成功"));
 	if (!scm.CourseCheck())QMessageBox::warning(this, QString::fromLocal8Bit("课程不足"), QString::fromLocal8Bit("请保证至少选择4门专业课与2门非专业课"));
-	TableDisplay(sm_3);
+	TableDisplay();
 }
 
 void StudentOwnCourseWidget::SelectAssistant() {
@@ -84,5 +107,5 @@ void StudentOwnCourseWidget::Exit() {
 }
 
 void StudentOwnCourseWidget::Refresh() {
-	TableDisplay(sm_3);
+	TableDisplay();
 }

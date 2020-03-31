@@ -7,7 +7,7 @@ StudentMainWindow::StudentMainWindow(bool mode, QString student, QMainWindow* pa
 	ui.setupUi(this);
 	sm = mode;
 	stu = student;
-	AssistantExitJudge();
+	if (!sm)AssistantExitJudge();
 }
 
 void StudentMainWindow::ShowOwnCourse() {

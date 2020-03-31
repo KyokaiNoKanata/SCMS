@@ -12,7 +12,7 @@ class StudentCourseListWidget :public QWidget {
 	Q_OBJECT
 public:
 	explicit StudentCourseListWidget(bool mode, QString student, QWidget* parent = Q_NULLPTR);
-	void TableDisplay(bool mode);
+	void TableDisplay();
 	void NTableDisplay();
 	void JWTableDisplay();
 

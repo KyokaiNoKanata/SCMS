@@ -4,6 +4,7 @@ void Keyring::ReadFile() {
 	QFile file("../data/student.txt");
 	file.open(QIODevice::ReadOnly | QIODevice::Text);
 	QTextStream in(&file);
+	in.setCodec("UTF-8");
 	while (!in.atEnd()) {
 		QStringList qsl = in.readLine().split(',');
 		AddToKeyring(qsl[0], qsl[1]);
@@ -15,7 +16,7 @@ void Keyring::WriteFile() {
 	QFile file("../data/student.txt");
 	file.open(QIODevice::WriteOnly | QIODevice::Text);
 	QTextStream out(&file);
-	out.setCodec(QTextCodec::codecForName("UTF-8"));
+	out.setCodec("UTF-8");
 	for (map<QString, QString>::iterator it = Key.begin();it != Key.end();it++) {
 		out << it->first << ',' << it->second << endl;
 	}

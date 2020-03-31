@@ -7,11 +7,11 @@ StudentCourseListWidget::StudentCourseListWidget(bool mode, QString student, QWi
 	ui.setupUi(this);
 	stu_2 = student;
 	sm_2 = mode;
-	TableDisplay(sm_2);
+	TableDisplay();
 }
 
-void StudentCourseListWidget::TableDisplay(bool mode) {
-	if (!mode) {
+void StudentCourseListWidget::TableDisplay() {
+	if (!sm_2) {
 		NTableDisplay();
 	}
 	else {
@@ -20,23 +20,45 @@ void StudentCourseListWidget::TableDisplay(bool mode) {
 }
 
 void StudentCourseListWidget::NTableDisplay() {
-	CourseManage scm;
-	scm.ReadStudentFile(sm_2, stu_2);
-	set<Course>CourseSet = scm.CourseSet;
+	CourseManage cm;
+	cm.ReadFile(sm_2);
+	set<Course>CourseSet = cm.CourseSet;
 	ui.tableWidget->setRowCount(CourseSet.size());
 	int CurrentRow = 0;
 	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++, CurrentRow++) {
 		ui.tableWidget->setItem(CurrentRow, 0, new QTableWidgetItem(QString("%1").arg(it->ID, 3, 10, QLatin1Char('0'))));
 		ui.tableWidget->setItem(CurrentRow, 1, new QTableWidgetItem(it->Name));
 		ui.tableWidget->setItem(CurrentRow, 2, new QTableWidgetItem(it->Teacher));
-		ui.tableWidget->setItem(CurrentRow, 3, new QTableWidgetItem(it->Type));
-		ui.tableWidget->setItem(CurrentRow, 4, new QTableWidgetItem(it->PersonalAssistant));
+		ui.tableWidget->setItem(CurrentRow, 3, new QTableWidgetItem(it->MaxNumber));
+		ui.tableWidget->setItem(CurrentRow, 4, new QTableWidgetItem(it->CurrentNumber));
+		ui.tableWidget->setItem(CurrentRow, 5, new QTableWidgetItem(it->Type));
+		ui.tableWidget->setItem(CurrentRow, 6, new QTableWidgetItem(it->AssistantQS));
 	}
 	ui.tableWidget->resizeColumnsToContents();
 }
 
 void StudentCourseListWidget::JWTableDisplay() {
-
+	CourseManage cm;
+	cm.ReadFile(sm_2);
+	set<Course>CourseSet = cm.CourseSet;
+	ui.tableWidget->setColumnCount(9);
+	ui.tableWidget->setRowCount(CourseSet.size());
+	QStringList qsl;
+	qsl << QString::fromLocal8Bit("课程编号") << QString::fromLocal8Bit("课程名称") << QString::fromLocal8Bit("性质") << QString::fromLocal8Bit("开课院系") << QString::fromLocal8Bit("学分") << QString::fromLocal8Bit("学时") << QString::fromLocal8Bit("校区") << QString::fromLocal8Bit("教师") << QString::fromLocal8Bit("上课时间及地点");
+	ui.tableWidget->setHorizontalHeaderLabels(qsl);
+	int CurrentRow = 0;
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++, CurrentRow++) {
+		ui.tableWidget->setItem(CurrentRow, 0, new QTableWidgetItem(it->JWID));
+		ui.tableWidget->setItem(CurrentRow, 1, new QTableWidgetItem(it->Name));
+		ui.tableWidget->setItem(CurrentRow, 2, new QTableWidgetItem(it->Type));
+		ui.tableWidget->setItem(CurrentRow, 3, new QTableWidgetItem(it->College));
+		ui.tableWidget->setItem(CurrentRow, 4, new QTableWidgetItem(it->Score));
+		ui.tableWidget->setItem(CurrentRow, 5, new QTableWidgetItem(it->Hour));
+		ui.tableWidget->setItem(CurrentRow, 6, new QTableWidgetItem(it->Campus));
+		ui.tableWidget->setItem(CurrentRow, 7, new QTableWidgetItem(it->Teacher));
+		ui.tableWidget->setItem(CurrentRow, 8, new QTableWidgetItem(it->TPWQS));
+	}
+	ui.tableWidget->resizeColumnsToContents();
 }
 
 void StudentCourseListWidget::SelectCourse(QString student) {
@@ -44,7 +66,7 @@ void StudentCourseListWidget::SelectCourse(QString student) {
 	cm.ReadFile(sm_2);
 	int CurrentRow = ui.tableWidget->currentRow();
 	Course course = cm.getNthCourse(CurrentRow);
-	if (!course.isFull()) {
+	if (!course.isFull() || sm_2) {
 		CourseManage scm;
 		scm.ReadStudentFile(sm_2, stu_2);
 		if (scm.CourseSet.count(course)) {
@@ -57,7 +79,7 @@ void StudentCourseListWidget::SelectCourse(QString student) {
 		QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("选课成功"));
 		scm.WriteStudentFile(sm_2, stu_2);
 		cm.WriteFile(sm_2);
-		TableDisplay(sm_2);
+		TableDisplay();
 	}
 	else {
 		QMessageBox::warning(this, QString::fromLocal8Bit("选课失败"), QString::fromLocal8Bit("课程已满"));

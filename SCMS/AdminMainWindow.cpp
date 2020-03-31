@@ -14,8 +14,8 @@ void AdminMainWindow::Exit() {
 }
 
 void AdminMainWindow::ViewCourseList() {
-	AdminCourseListWidget* clw = new AdminCourseListWidget(am, Q_NULLPTR);
-	clw->show();
+	AdminCourseListWidget* aclw = new AdminCourseListWidget(am, Q_NULLPTR);
+	aclw->show();
 }
 
 void AdminMainWindow::InputCourse() {
