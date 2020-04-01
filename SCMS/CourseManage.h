@@ -12,6 +12,7 @@
 #include "qfiledialog.h"
 #include "qstring.h"
 #include "qstringlist.h"
+#include "qdebug.h"
 
 #include "Course.h"
 

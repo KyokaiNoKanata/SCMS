@@ -27,12 +27,15 @@ void ViewScheduleWidget::Next() {
 		QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("已是最后一个"));
 	}
 	else {
+		ui.tableWidget->clear();
 		stack<Course>sc = *it;
 		while (!sc.empty()) {
 			Course course = sc.top();
 			Display(course);
 			sc.pop();
 		}
+		ui.tableWidget->resizeColumnsToContents();
+		ui.tableWidget->resizeRowsToContents();
 		it++;
 	}
 }
@@ -40,7 +43,7 @@ void ViewScheduleWidget::Next() {
 void ViewScheduleWidget::Display(Course course) {
 	for (int i = 0;i < course.DayList.size();i++) {
 		for (int j = course.SList[i];j <= course.EList[i];j++) {
-			ui.tableWidget->setItem(j,course.DayList[i],new QTableWidgetItem(course.Name));
+			ui.tableWidget->setItem(j, course.DayList[i], new QTableWidgetItem(course.Name + '\n' + course.Teacher));
 		}
 	}
 }

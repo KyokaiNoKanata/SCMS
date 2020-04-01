@@ -82,6 +82,8 @@ void CourseManage::JWInputCourse(QString path) {
 			course.ID = CourseSet.size() + 1;
 			int i = 0;
 			course.JWID = qsl[i++];
+			Father[course.JWID] = course.JWID;
+			Connection[course.JWID].insert(course.JWID);
 			course.Name = qsl[i++];
 			course.Type = qsl[i].isEmpty() ? "Null" : qsl[i];
 			i++;
@@ -197,6 +199,8 @@ void CourseManage::JWReadFile() {
 		int i = 0;
 		course.ID = qsl[i++].toInt();
 		course.JWID = qsl[i++];
+		Father[course.JWID] = course.JWID;
+		Connection[course.JWID].insert(course.JWID);
 		course.Name = qsl[i++];
 		course.Type = qsl[i++];
 		course.College = qsl[i++];
@@ -427,6 +431,8 @@ void CourseManage::JWReadStudentFile(QString ID) {
 		int i = 0;
 		course.ID = qsl[i++].toInt();
 		course.JWID = qsl[i++];
+		Father[course.JWID] = course.JWID;
+		Connection[course.JWID].insert(course.JWID);
 		course.Name = qsl[i++];
 		course.Type = qsl[i++];
 		course.College = qsl[i++];
@@ -642,6 +648,7 @@ set<stack<Course>>CourseManage::getSchedule() {
 	MaxCount = 0;
 	set<Course>::iterator it = CourseSet.begin();
 	Search(it);
+	qDebug() << "aaa6";
 	return TimeTable;
 }
 
@@ -680,23 +687,31 @@ QString CourseManage::getFather(QString qs) {
 void CourseManage::Connect(QString qs, QString qs_2) {
 	Father[qs_2] = getFather(qs);
 	for (set<QString>::iterator it = Connection[qs_2].begin();it != Connection[qs_2].end();it++) {
-		Connection[qs].insert(*it);
+		Connection[Father[qs]].insert(*it);
 	}
 }
 
 void CourseManage::Search(set<Course>::iterator it) {
+	qDebug() << "aaa2";
 	if (it == CourseSet.end()) {
+		qDebug() << "aaa9";
 		TimeTable.insert(Temp);
+		qDebug() << "aaa111";
 		int s = Temp.size();
+		qDebug() << "aaa11";
 		MaxCount = max(MaxCount, s);
+		qDebug() << "aaa1";
 		return;
 	}
 	else {
 		set<Course>sc = getSubstance(it->JWID);
+		qDebug() << sc.size();
 		it++;
 		Search(it);
 		for (set<Course>::iterator it_2 = sc.begin();it_2 != sc.end();it_2++) {
-			if (ScheduleCheck(*it_2) || it->TPWQS != "Null") {
+			qDebug() << it_2->JWID;
+			if (ScheduleCheck(*it_2) && it_2->TPWQS != "Null") {
+				qDebug() << "aaa5";
 				AddToSchedule(*it_2, 1);
 				Temp.push(*it_2);
 				Search(it);
@@ -719,7 +734,8 @@ set<Course>CourseManage::getSubstance(QString qs) {
 	set<Course>sc;
 	set<QString>sqs = getConnection(qs);
 	for (set<QString>::iterator it = sqs.begin();it != sqs.end();it++) {
-		sc.insert(getCourseJWID(*it).begin(), getCourseJWID(*it).end());
+		set<Course>sc_2 = getCourseJWID(*it);
+		sc.insert(sc_2.begin(), sc_2.end());
 	}
 	return sc;
 }
@@ -727,7 +743,9 @@ set<Course>CourseManage::getSubstance(QString qs) {
 set<Course>CourseManage::getCourseJWID(QString qs) {
 	set<Course>sc;
 	for (set<Course>::iterator it = CourseSet_2.begin();it != CourseSet_2.end();it++) {
-		sc.insert(*it);
+		if (it->JWID == qs) {
+			sc.insert(*it);
+		}
 	}
 	return sc;
 }

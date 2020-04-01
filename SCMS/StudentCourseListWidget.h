@@ -2,6 +2,7 @@
 
 #include "qwidget.h"
 #include "qmessagebox.h"
+#include "qtablewidget.h"
 
 #include "Course.h"
 #include "CourseManage.h"

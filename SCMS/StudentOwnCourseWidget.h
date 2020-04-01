@@ -1,6 +1,7 @@
 #pragma once
 
 #include "qwidget.h"
+#include "qtablewidget.h"
 
 #include "Course.h"
 #include "CourseManage.h"
