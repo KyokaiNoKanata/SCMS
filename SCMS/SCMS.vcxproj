@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddConnectionWidget.cpp" />
     <ClCompile Include="AddCourseWidget.cpp" />
     <ClCompile Include="AdminCourseListWidget.cpp" />
     <ClCompile Include="AdminMainWindow.cpp" />
@@ -94,6 +95,7 @@
     <ClCompile Include="StudentCourseListWidget.cpp" />
     <ClCompile Include="StudentMainWindow.cpp" />
     <ClCompile Include="StudentOwnCourseWidget.cpp" />
+    <ClCompile Include="ViewScheduleWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="LoginDialog.qrc" />
@@ -108,9 +110,11 @@
     <QtMoc Include="AdminMainWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="AddConnectionWidget.h" />
     <ClInclude Include="Course.h" />
     <ClInclude Include="CourseManage.h" />
     <ClInclude Include="Keyring.h" />
+    <QtMoc Include="ViewScheduleWidget.h" />
     <QtMoc Include="StudentOwnCourseWidget.h" />
     <QtMoc Include="StudentMainWindow.h" />
     <QtMoc Include="StudentCourseListWidget.h" />
@@ -120,6 +124,7 @@
     <QtMoc Include="EditCourseWidget.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="AddConnectionWidget.ui" />
     <QtUic Include="AddCourseWidget.ui" />
     <QtUic Include="AdminCourseListWidget.ui" />
     <QtUic Include="AdminMainWindow.ui" />
@@ -130,6 +135,7 @@
     <QtUic Include="StudentCourseListWidget.ui" />
     <QtUic Include="StudentMainWindow.ui" />
     <QtUic Include="StudentOwnCourseWidget.ui" />
+    <QtUic Include="ViewScheduleWidget.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

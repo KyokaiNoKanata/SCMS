@@ -5,6 +5,7 @@
 #include "CourseManage.h"
 #include "AddCourseWidget.h"
 #include "EditCourseWidget.h"
+#include "AddConnectionWidget.h"
 
 #include "ui_AdminCourseListWidget.h"
 
@@ -25,6 +26,7 @@ private slots:
 	void JWVerifiedInfo();
 	void Refresh();
 	void Exit();
+	void AddConnect();
 
 private:
 	Ui::AdminCourseListWidgetClass ui;

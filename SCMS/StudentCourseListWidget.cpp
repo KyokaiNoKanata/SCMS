@@ -74,6 +74,7 @@ void StudentCourseListWidget::SelectCourse(QString student) {
 			return;
 		}
 		course.PersonalAssistant = QString::fromLocal8Bit("未选择");
+		scm.Father[course.JWID] = course.JWID;
 		scm.InsertCourse(course);
 		cm.AddToNth(CurrentRow, stu_2);
 		QMessageBox::information(this, QString::fromLocal8Bit("提示"), QString::fromLocal8Bit("选课成功"));

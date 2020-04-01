@@ -41,42 +41,69 @@ void CourseManage::JWInputCourse(QString path) {
 		QStringList qsl = in.readLine().split('\t');
 		if (qsl[0][0].isNumber()) {
 			if (flag) {
+				for (int i = 0;i < course.TPWList.size();i++) {
+					int w;
+					int s;
+					int e;
+					QStringList qsl_2 = course.TPWList[i].split(' ');
+					if (qsl_2[0] == QString::fromLocal8Bit("周一")) {
+						w = 0;
+					}
+					else if (qsl_2[0] == QString::fromLocal8Bit("周二")) {
+						w = 1;
+					}
+					else if (qsl_2[0] == QString::fromLocal8Bit("周三")) {
+						w = 2;
+					}
+					else if (qsl_2[0] == QString::fromLocal8Bit("周四")) {
+						w = 3;
+					}
+					else if (qsl_2[0] == QString::fromLocal8Bit("周五")) {
+						w = 4;
+					}
+					else if (qsl_2[0] == QString::fromLocal8Bit("周六")) {
+						w = 5;
+					}
+					else if (qsl_2[0] == QString::fromLocal8Bit("周日")) {
+						w = 6;
+					}
+					course.DayList.push_back(w);
+					qsl_2[1];
+					QStringList qsl_3 = qsl_2[1].mid(1, qsl_2[1].size() - 2).split('-');
+					s = qsl_3[0].toInt();
+					course.SList.push_back(s);
+					e = qsl_3[1].toInt();
+					course.EList.push_back(e);
+				}
 				CourseSet.insert(course);
 				Course course_1;
 				course = course_1;
 			}
 			course.ID = CourseSet.size() + 1;
-			course.JWID = qsl[0];
-			int i = 1;
+			int i = 0;
+			course.JWID = qsl[i++];
 			course.Name = qsl[i++];
-			course.Type = isType(qsl[i]) ? qsl[i++] : "Null";
-			course.Type = course.Type.isEmpty() ? "Null" : course.Type;
-			course.College = qsl[i][0].isNumber() ? "Null" : qsl[i++];
-			course.College = course.College.isEmpty() ? "Null" : course.College;
+			course.Type = qsl[i].isEmpty() ? "Null" : qsl[i];
+			i++;
+			course.College = qsl[i].isEmpty() ? "Null" : qsl[i];
+			i++;
 			course.Score = qsl[i++];
 			course.Hour = qsl[i++];
+			course.Campus = qsl[i].isEmpty() ? "Null" : qsl[i];
+			i++;
+			course.Teacher = qsl[i].isEmpty() ? "Null" : qsl[i];
+			i++;
 			if (i == qsl.size()) {
+				course.TPWQS = "NULL";
 				flag = 1;
-				course.Campus = course.Teacher = course.TPWQS = "Null";
-				continue;
-			}
-			course.Campus = (isCampus(qsl[i]) && !qsl[i].isEmpty()) ? qsl[i++] : "Null";
-			course.Campus = course.Campus.isEmpty() ? "Null" : course.Campus;
-			if (i == qsl.size()) {
-				flag = 1;
-				course.Teacher = course.TPWQS = "Null";
-				continue;
-			}
-			course.Teacher = isTPW(qsl[i]) ? "Null" : qsl[i++];
-			course.Teacher = course.Teacher.isEmpty() ? "Null" : course.Teacher;
-			if (i == qsl.size()) {
-				flag = 1;
-				course.TPWQS = "Null";
 				continue;
 			}
 			if (!qsl[i].isEmpty()) {
 				course.TPWList.push_back(qsl[i]);
 				course.TPWQS += (qsl[i] + ';');
+			}
+			else {
+				course.TPWQS = "Null";
 			}
 			flag = 1;
 		}
@@ -166,7 +193,6 @@ void CourseManage::JWReadFile() {
 	in_3.setCodec("UTF-8");
 	while (!in.atEnd()) {
 		QStringList qsl = in.readLine().split('\t');
-		QTextStream in(&file);
 		Course course;
 		int i = 0;
 		course.ID = qsl[i++].toInt();
@@ -180,7 +206,7 @@ void CourseManage::JWReadFile() {
 		course.Teacher = qsl[i++];
 		course.TPWQS = qsl[i];
 		if (qsl[i] != "Null") {
-			course.TPWList = qsl[i].split(';');
+			course.TPWList = qsl[i].mid(0, qsl[i].size() - 1).split(';');
 		}
 		qsl = in_2.readLine().split('\t');
 		course.AssistantQS = qsl[1];
@@ -196,11 +222,45 @@ void CourseManage::JWReadFile() {
 				}
 			}
 		}
+		for (int i = 0;i < course.TPWList.size();i++) {
+			int w;
+			int s;
+			int e;
+			QStringList qsl_2 = course.TPWList[i].split(' ');
+			if (qsl_2[0] == QString::fromLocal8Bit("周一")) {
+				w = 0;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周二")) {
+				w = 1;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周三")) {
+				w = 2;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周四")) {
+				w = 3;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周五")) {
+				w = 4;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周六")) {
+				w = 5;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周日")) {
+				w = 6;
+			}
+			course.DayList.push_back(w);
+			QStringList qsl_3 = qsl_2[1].mid(1, qsl_2[1].size() - 2).split('-');
+			s = qsl_3[0].toInt();
+			course.SList.push_back(s);
+			e = qsl_3[1].toInt();
+			course.EList.push_back(e);
+		}
 		CourseSet.insert(course);
 	}
 	file.close();
 	file_2.close();
 	file_3.close();
+	ReadConnection();
 }
 
 void CourseManage::NWriteFile() {
@@ -265,6 +325,7 @@ void CourseManage::JWWriteFile() {
 	file.close();
 	file_2.close();
 	file_3.close();
+	WriteConnection();
 }
 
 
@@ -375,12 +436,47 @@ void CourseManage::JWReadStudentFile(QString ID) {
 		course.Teacher = qsl[i++];
 		course.TPWQS = qsl[i];
 		if (qsl[i] != "Null") {
-			course.TPWList = qsl[i].split(';');
+			course.TPWList = qsl[i].mid(0, qsl[i].size() - 1).split(';');
 		}
 		course.PersonalAssistant = qsl[++i];
+		for (int i = 0;i < course.TPWList.size();i++) {
+			int w;
+			int s;
+			int e;
+			QStringList qsl_2 = course.TPWList[i].split(' ');
+			if (qsl_2[0] == QString::fromLocal8Bit("周一")) {
+				w = 0;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周二")) {
+				w = 1;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周三")) {
+				w = 2;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周四")) {
+				w = 3;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周五")) {
+				w = 4;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周六")) {
+				w = 5;
+			}
+			else if (qsl_2[0] == QString::fromLocal8Bit("周日")) {
+				w = 6;
+			}
+			course.DayList.push_back(w);
+			qsl_2[1];
+			QStringList qsl_3 = qsl_2[1].mid(1, qsl_2[1].size() - 2).split('-');
+			s = qsl_3[0].toInt();
+			course.SList.push_back(s);
+			e = qsl_3[1].toInt();
+			course.EList.push_back(e);
+		}
 		CourseSet.insert(course);
 	}
 	file.close();
+	ReadConnection();
 }
 
 void CourseManage::NWriteStudentFile(QString ID) {
@@ -410,6 +506,7 @@ void CourseManage::JWWriteStudentFile(QString ID) {
 		out << it->PersonalAssistant << endl;
 	}
 	file.close();
+	WriteConnection();
 }
 
 void CourseManage::InsertCourse(Course course) {
@@ -497,5 +594,172 @@ bool CourseManage::isCampus(QString qs) {
 }
 
 bool CourseManage::isTPW(QString qs) {
-	return qs.mid(0, 1) == QString::fromLocal8Bit("第");
+	return qs.mid(0, 1) == QString::fromLocal8Bit("周");
+}
+
+int CourseManage::TypeCount(int mode) {
+	int n = 0;
+	QString qs;
+	switch (mode)
+	{
+	case 1:
+		qs = QString::fromLocal8Bit("核心");
+		break;
+	case 2:
+		qs = QString::fromLocal8Bit("共通");
+		break;
+	case 3:
+		qs = QString::fromLocal8Bit("平台");
+		break;
+	case 4:
+		qs = QString::fromLocal8Bit("通识");
+		break;
+	case 5:
+		qs = QString::fromLocal8Bit("通修");
+		break;
+	case 6:
+		qs = QString::fromLocal8Bit("选修");
+	}
+	for (set<Course>::iterator it = CourseSet.begin();it != CourseSet.end();it++) {
+		if (it->Type == qs) {
+			n++;
+		}
+	}
+	return n;
+}
+
+void CourseManage::Init() {
+	for (int i = 0;i <= 4;i++) {
+		for (int j = 0;j <= 12;j++) {
+			Table[i][j] = 0;
+		}
+	}
+}
+
+set<stack<Course>>CourseManage::getSchedule() {
+	Init();
+	TimeTable.clear();
+	MaxCount = 0;
+	set<Course>::iterator it = CourseSet.begin();
+	Search(it);
+	return TimeTable;
+}
+
+void CourseManage::AddToSchedule(Course course, bool mode) {
+	for (int i = 0;i < course.DayList.size();i++) {
+		for (int j = course.SList[i] - 1;j < course.EList[i];j++) {
+			Table[course.DayList[i]][j] = mode;
+		}
+	}
+}
+
+bool CourseManage::ScheduleCheck(Course course) {
+	for (int i = 0;i < course.DayList.size();i++) {
+		for (int j = course.SList[i] - 1;j < course.EList[i];j++) {
+			if (Table[course.DayList[i]][j]) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
+QString CourseManage::getFather(QString qs) {
+	if (Father[qs] == qs) {
+		return qs;
+	}
+	else {
+		Father[qs] = getFather(Father[qs]);
+		for (set<QString>::iterator it = Connection[qs].begin();it != Connection[qs].end();it++) {
+			Connection[Father[qs]].insert(*it);
+		}
+		return Father[qs];
+	}
+}
+
+void CourseManage::Connect(QString qs, QString qs_2) {
+	Father[qs_2] = getFather(qs);
+	for (set<QString>::iterator it = Connection[qs_2].begin();it != Connection[qs_2].end();it++) {
+		Connection[qs].insert(*it);
+	}
+}
+
+void CourseManage::Search(set<Course>::iterator it) {
+	if (it == CourseSet.end()) {
+		TimeTable.insert(Temp);
+		int s = Temp.size();
+		MaxCount = max(MaxCount, s);
+		return;
+	}
+	else {
+		set<Course>sc = getSubstance(it->JWID);
+		it++;
+		Search(it);
+		for (set<Course>::iterator it_2 = sc.begin();it_2 != sc.end();it_2++) {
+			if (ScheduleCheck(*it_2) || it->TPWQS != "Null") {
+				AddToSchedule(*it_2, 1);
+				Temp.push(*it_2);
+				Search(it);
+				Temp.pop();
+				AddToSchedule(*it_2, 0);
+			}
+		}
+	}
+}
+
+set<QString>CourseManage::getConnection(QString qs) {
+	set<QString>sqs;
+	for (set<QString>::iterator it = Connection[getFather(qs)].begin();it != Connection[getFather(qs)].end();it++) {
+		sqs.insert(*it);
+	}
+	return sqs;
+}
+
+set<Course>CourseManage::getSubstance(QString qs) {
+	set<Course>sc;
+	set<QString>sqs = getConnection(qs);
+	for (set<QString>::iterator it = sqs.begin();it != sqs.end();it++) {
+		sc.insert(getCourseJWID(*it).begin(), getCourseJWID(*it).end());
+	}
+	return sc;
+}
+
+set<Course>CourseManage::getCourseJWID(QString qs) {
+	set<Course>sc;
+	for (set<Course>::iterator it = CourseSet_2.begin();it != CourseSet_2.end();it++) {
+		sc.insert(*it);
+	}
+	return sc;
+}
+
+void CourseManage::ReadConnection() {
+	QFile file("../data/jwconnection.txt");
+	file.open(QIODevice::ReadOnly | QIODevice::Text);
+	QTextStream in(&file);
+	in.setCodec("UTF-8");
+	ConnectList = in.readAll();
+	QStringList qsl = ConnectList.split(' ');
+	for (int i = 0;i < ConnectList.size() - 1;i++) {
+		Connect(qsl[i], qsl[i++]);
+	}
+	file.close();
+}
+
+void CourseManage::WriteConnection() {
+	QFile file("../data/jwconnection.txt");
+	file.open(QIODevice::WriteOnly | QIODevice::Text);
+	QTextStream out(&file);
+	out.setCodec("UTF-8");
+	out << ConnectList;
+	file.close();
+}
+
+void CourseManage::NewConnect(QString qs, QString qs_2) {
+	Connect(qs, qs_2);
+	if (ConnectList.isEmpty()) {
+		ConnectList = qs + ' ' + qs_2;
+	}
+	else {
+		ConnectList += (' ' + qs + ' ' + qs_2);
+	}
 }

@@ -95,6 +95,13 @@
       <string>详细信息</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
+      <item row="4" column="0">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="text">
+         <string>修改信息</string>
+        </property>
+       </widget>
+      </item>
       <item row="3" column="0">
        <widget class="QPushButton" name="pushButton_3">
         <property name="text">
@@ -109,10 +116,17 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QPushButton" name="pushButton_4">
+      <item row="3" column="1">
+       <widget class="QPushButton" name="pushButton_6">
         <property name="text">
-         <string>修改信息</string>
+         <string>添加课程</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="text">
+         <string>删除课程</string>
         </property>
        </widget>
       </item>
@@ -181,17 +195,10 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QPushButton" name="pushButton_5">
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButton_7">
         <property name="text">
-         <string>删除课程</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QPushButton" name="pushButton_6">
-        <property name="text">
-         <string>添加课程</string>
+         <string>添加关联</string>
         </property>
        </widget>
       </item>
@@ -210,7 +217,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>807</x>
-     <y>273</y>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
      <x>635</x>
@@ -258,7 +265,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>807</x>
-     <y>302</y>
+     <y>332</y>
     </hint>
     <hint type="destinationlabel">
      <x>635</x>
@@ -298,6 +305,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>AdminCourseListWidgetClass</receiver>
+   <slot>AddConnect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>742</x>
+     <y>270</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>822</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>DeleteCourse()</slot>
@@ -308,5 +331,6 @@
   <slot>SelectAssistant()</slot>
   <slot>Exit()</slot>
   <slot>InputCourse()</slot>
+  <slot>AddConnect()</slot>
  </slots>
 </ui>

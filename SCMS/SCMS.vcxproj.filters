@@ -67,6 +67,12 @@
     <ClCompile Include="StudentOwnCourseWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ViewScheduleWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddConnectionWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="LoginDialog.qrc">
@@ -102,6 +108,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="StudentOwnCourseWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ViewScheduleWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="AddConnectionWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -145,6 +157,12 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="StudentOwnCourseWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="ViewScheduleWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddConnectionWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

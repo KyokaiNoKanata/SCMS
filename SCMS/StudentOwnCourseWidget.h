@@ -5,6 +5,8 @@
 #include "Course.h"
 #include "CourseManage.h"
 #include "SetAssistantDialog.h"
+#include "ViewScheduleWidget.h"
+#include "AddConnectionWidget.h"
 
 #include "ui_StudentOwnCourseWidget.h"
 
@@ -15,12 +17,16 @@ public:
 	void TableDisplay();
 	void NTableDisplay();
 	void JWTableDisplay();
+	void NStatus();
+	void JWStatus();
 
 private slots:
 	void Refresh();
 	void DeleteCourse();
 	void SelectAssistant();
 	void AssistantApply();
+	void ViewSchedule();
+	void AddConnection();
 	void Exit();
 
 private:

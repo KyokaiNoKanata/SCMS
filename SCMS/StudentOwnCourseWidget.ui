@@ -6,103 +6,174 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>447</width>
-    <height>306</height>
+    <width>647</width>
+    <height>445</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="4">
-    <widget class="QPushButton" name="pushButton_4">
-     <property name="text">
-      <string>退出</string>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>我的课程</string>
      </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="dragEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
+        <attribute name="horizontalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>课程编号</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>课程名</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>任课教师</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>课程类型</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>个人助教</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="3" column="2">
-    <widget class="QPushButton" name="pushButton_3">
-     <property name="text">
-      <string>选择助教</string>
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>统计信息</string>
      </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>报名助教</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="3">
-    <widget class="QPushButton" name="pushButton_2">
-     <property name="text">
-      <string>退课</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QPushButton" name="pushButton_5">
-     <property name="text">
-      <string>刷新</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="5">
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="dragEnabled">
-      <bool>false</bool>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
-     </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
-     <property name="showGrid">
-      <bool>false</bool>
-     </property>
-     <property name="sortingEnabled">
-      <bool>false</bool>
-     </property>
-     <attribute name="horizontalHeaderCascadingSectionResizes">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderCascadingSectionResizes">
-      <bool>false</bool>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>课程编号</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>课程名</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>任课教师</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>课程类型</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>个人助教</string>
-      </property>
-     </column>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="3" column="1">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>选择助教</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>退课</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="text">
+         <string>退出</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>报名助教</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="text">
+         <string>生成课表</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QTableWidget" name="tableWidget_2">
+        <row>
+         <property name="text">
+          <string>核心</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>共通</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>平台</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>通识</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>通修</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>选修</string>
+         </property>
+        </row>
+        <column>
+         <property name="text">
+          <string>已选数目</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="text">
+         <string>刷新</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="text">
+         <string>添加关联</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
@@ -116,12 +187,12 @@
    <slot>AssistantApply()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>176</x>
-     <y>296</y>
+     <x>496</x>
+     <y>396</y>
     </hint>
     <hint type="destinationlabel">
      <x>122</x>
-     <y>566</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -132,12 +203,12 @@
    <slot>DeleteCourse()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>350</x>
-     <y>296</y>
+     <x>496</x>
+     <y>425</y>
     </hint>
     <hint type="destinationlabel">
      <x>291</x>
-     <y>565</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -148,12 +219,12 @@
    <slot>SelectAssistant()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>263</x>
-     <y>296</y>
+     <x>627</x>
+     <y>396</y>
     </hint>
     <hint type="destinationlabel">
      <x>347</x>
-     <y>562</y>
+     <y>414</y>
     </hint>
    </hints>
   </connection>
@@ -164,8 +235,8 @@
    <slot>Exit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>437</x>
-     <y>296</y>
+     <x>627</x>
+     <y>425</y>
     </hint>
     <hint type="destinationlabel">
      <x>560</x>
@@ -180,12 +251,44 @@
    <slot>Refresh()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>69</x>
-     <y>287</y>
+     <x>496</x>
+     <y>367</y>
     </hint>
     <hint type="destinationlabel">
      <x>82</x>
      <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentOwnCourseWidgetClass</receiver>
+   <slot>ViewSchedule()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>627</x>
+     <y>367</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>388</x>
+     <y>388</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentOwnCourseWidgetClass</receiver>
+   <slot>AddConnection()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>554</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>642</x>
+     <y>311</y>
     </hint>
    </hints>
   </connection>
@@ -197,5 +300,7 @@
   <slot>Exit()</slot>
   <slot>TableDiaplay()</slot>
   <slot>Refresh()</slot>
+  <slot>ViewSchedule()</slot>
+  <slot>AddConnection()</slot>
  </slots>
 </ui>

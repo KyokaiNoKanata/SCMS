@@ -60,11 +60,17 @@ void AdminCourseListWidget::JWTableDisplay() {
 }
 
 void AdminCourseListWidget::AddCourse() {
+	if (am_2) {
+		QMessageBox::information(this, QString::fromLocal8Bit("操作失败"), QString::fromLocal8Bit("该模式下不可用"));
+	}
 	AddCourseWidget* adw = new AddCourseWidget;
 	adw->show();
 }
 
 void AdminCourseListWidget::DeleteCourse() {
+	if (am_2) {
+		QMessageBox::warning(this, QString::fromLocal8Bit("操作失败"), QString::fromLocal8Bit("该模式下不可用"));
+	}
 	CourseManage cm;
 	cm.ReadFile(am_2);
 	int CurrentRow = ui.tableWidget->currentRow();
@@ -80,6 +86,9 @@ void AdminCourseListWidget::DeleteCourse() {
 }
 
 void AdminCourseListWidget::InfoEdit() {
+	if (am_2) {
+		QMessageBox::information(this, QString::fromLocal8Bit("操作失败"), QString::fromLocal8Bit("该模式下不可用"));
+	}
 	EditCourseWidget* ecw = new EditCourseWidget(ui.tableWidget->currentItem()->row(), Q_NULLPTR);
 	ecw->show();
 }
@@ -136,4 +145,12 @@ void AdminCourseListWidget::JWVerifiedInfo() {
 	ui.tableWidget_2->setItem(9, 0, new QTableWidgetItem(course.AssistantQS));
 	ui.tableWidget_2->setItem(10, 0, new QTableWidgetItem(course.getMember()));
 	ui.tableWidget_2->resizeColumnsToContents();
+}
+
+void AdminCourseListWidget::AddConnect() {
+	if (!am_2) {
+		QMessageBox::information(this, QString::fromLocal8Bit("操作失败"), QString::fromLocal8Bit("该模式下不可用"));
+	}
+	AddConnectionWidget* acw = new AddConnectionWidget;
+	acw->show();
 }

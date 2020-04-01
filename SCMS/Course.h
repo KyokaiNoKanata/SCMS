@@ -22,10 +22,7 @@ public:
 	QString MaxNumber;
 	QString AssistantQS;
 	QString PersonalAssistant;
-	QString TimeQS;
-	QString WeekQS;
 	QString TPWQS;
-	QString Place;
 	QString College;
 	QString Score;
 	QString Hour;
@@ -33,8 +30,6 @@ public:
 	QString Teacher;
 	QStringList JWName;
 	QStringList Assistant;
-	QStringList Time;
-	QStringList Week;
 	QStringList TPWList;
 	int CN;
 	int MN;
@@ -44,6 +39,9 @@ public:
 	bool operator<(const Course& course)const;
 	QString getMember();
 	set<QString>MemberSet;
+	vector<int>DayList;
+	vector<int>SList;
+	vector<int>EList;
 
 private:
 	void Refresh();
