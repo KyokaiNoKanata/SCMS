@@ -136,11 +136,11 @@ void StudentOwnCourseWidget::Refresh() {
 	TableDisplay();
 }
 
-void StudentOwnCourseWidget::ViewSchedule() {
+void StudentOwnCourseWidget::View(bool mode) {
 	if (!sm_3) {
 		QMessageBox::information(this, QString::fromLocal8Bit("操作失败"), QString::fromLocal8Bit("该模式下不可用"));
 	}
-	ViewScheduleWidget* vsw = new ViewScheduleWidget(stu_3, Q_NULLPTR);
+	ViewScheduleWidget* vsw = new ViewScheduleWidget(mode, stu_3, Q_NULLPTR);
 	vsw->show();
 }
 
@@ -152,4 +152,12 @@ void StudentOwnCourseWidget::AddConnection() {
 		AddConnectionWidget* acw = new AddConnectionWidget;
 		acw->show();
 	}
+}
+
+void StudentOwnCourseWidget::TimeTable() {
+	View(0);
+}
+
+void StudentOwnCourseWidget::ViewSchedule() {
+	View(1);
 }

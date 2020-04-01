@@ -42,6 +42,7 @@ public:
 	vector<int>DayList;
 	vector<int>SList;
 	vector<int>EList;
+	vector<QString>PList;
 
 private:
 	void Refresh();

@@ -11,7 +11,7 @@
 class ViewScheduleWidget :public QWidget {
 	Q_OBJECT
 public:
-	explicit ViewScheduleWidget(QString student, QWidget* parent = Q_NULLPTR);
+	explicit ViewScheduleWidget(bool mode, QString student, QWidget* parent = Q_NULLPTR);
 	void Display(Course course);
 
 private slots:

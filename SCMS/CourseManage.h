@@ -12,7 +12,6 @@
 #include "qfiledialog.h"
 #include "qstring.h"
 #include "qstringlist.h"
-#include "qdebug.h"
 
 #include "Course.h"
 
@@ -48,7 +47,7 @@ public:
 	Course getNthCourse(int n);
 	set<Course>CourseSet;
 	set<Course>CourseSet_2;
-	set<stack<Course>>getSchedule();
+	set<stack<Course>>getSchedule(bool mode);
 	map<QString, QString>Father;
 
 private:
@@ -63,7 +62,7 @@ private:
 	void NReadStudentFile(QString ID);
 	void JWReadStudentFile(QString ID);
 	void Change(set<Course>::iterator it, bool mode, QString qs);
-	void Search(set<Course>::iterator it);
+	void Search(bool mode, set<Course>::iterator it);
 	void Init();
 	void AddToSchedule(Course course, bool mode);
 	bool ScheduleCheck(Course course);

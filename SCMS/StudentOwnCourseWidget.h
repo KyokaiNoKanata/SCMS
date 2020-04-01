@@ -20,6 +20,7 @@ public:
 	void JWTableDisplay();
 	void NStatus();
 	void JWStatus();
+	void View(bool mode);
 
 private slots:
 	void Refresh();
@@ -27,6 +28,7 @@ private slots:
 	void SelectAssistant();
 	void AssistantApply();
 	void ViewSchedule();
+	void TimeTable();
 	void AddConnection();
 	void Exit();
 

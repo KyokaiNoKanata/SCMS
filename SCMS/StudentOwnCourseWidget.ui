@@ -116,7 +116,7 @@
       <item row="2" column="1">
        <widget class="QPushButton" name="pushButton_6">
         <property name="text">
-         <string>生成课表</string>
+         <string>替换建议</string>
         </property>
        </widget>
       </item>
@@ -170,6 +170,13 @@
        <widget class="QPushButton" name="pushButton_7">
         <property name="text">
          <string>添加关联</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_8">
+        <property name="text">
+         <string>查看课表</string>
         </property>
        </widget>
       </item>
@@ -292,6 +299,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>StudentOwnCourseWidgetClass</receiver>
+   <slot>TimeTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>441</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>423</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>AssistantApply()</slot>
@@ -302,5 +325,6 @@
   <slot>Refresh()</slot>
   <slot>ViewSchedule()</slot>
   <slot>AddConnection()</slot>
+  <slot>TimeTable()</slot>
  </slots>
 </ui>

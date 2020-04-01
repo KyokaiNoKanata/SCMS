@@ -5,7 +5,7 @@ set<stack<Course>>Solution;
 set<stack<Course>>::iterator it;
 int Max;
 
-ViewScheduleWidget::ViewScheduleWidget(QString student, QWidget* parent) :QWidget(parent) {
+ViewScheduleWidget::ViewScheduleWidget(bool mode, QString student, QWidget* parent) :QWidget(parent) {
 	ui.setupUi(this);
 	stu_5 = student;
 	CourseManage cm;
@@ -13,7 +13,7 @@ ViewScheduleWidget::ViewScheduleWidget(QString student, QWidget* parent) :QWidge
 	cm.ReadFile(1);
 	scm.ReadStudentFile(1, stu_5);
 	scm.CourseSet_2 = cm.CourseSet;
-	Solution = scm.getSchedule();
+	Solution = scm.getSchedule(mode);
 	Max = scm.MaxCount;
 	it = Solution.begin();
 	Next();
@@ -43,7 +43,7 @@ void ViewScheduleWidget::Next() {
 void ViewScheduleWidget::Display(Course course) {
 	for (int i = 0;i < course.DayList.size();i++) {
 		for (int j = course.SList[i];j <= course.EList[i];j++) {
-			ui.tableWidget->setItem(j, course.DayList[i], new QTableWidgetItem(course.Name + '\n' + course.Teacher));
+			ui.tableWidget->setItem(j, course.DayList[i], new QTableWidgetItem(course.Name + '\n' + course.Teacher + ' ' + course.PList[i]));
 		}
 	}
 }

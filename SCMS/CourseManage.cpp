@@ -68,7 +68,7 @@ void CourseManage::JWInputCourse(QString path) {
 						w = 6;
 					}
 					course.DayList.push_back(w);
-					qsl_2[1];
+					course.PList.push_back(qsl_2[2]);
 					QStringList qsl_3 = qsl_2[1].mid(1, qsl_2[1].size() - 2).split('-');
 					s = qsl_3[0].toInt();
 					course.SList.push_back(s);
@@ -253,6 +253,7 @@ void CourseManage::JWReadFile() {
 				w = 6;
 			}
 			course.DayList.push_back(w);
+			course.PList.push_back(qsl_2[2]);
 			QStringList qsl_3 = qsl_2[1].mid(1, qsl_2[1].size() - 2).split('-');
 			s = qsl_3[0].toInt();
 			course.SList.push_back(s);
@@ -472,7 +473,7 @@ void CourseManage::JWReadStudentFile(QString ID) {
 				w = 6;
 			}
 			course.DayList.push_back(w);
-			qsl_2[1];
+			course.PList.push_back(qsl_2[2]);
 			QStringList qsl_3 = qsl_2[1].mid(1, qsl_2[1].size() - 2).split('-');
 			s = qsl_3[0].toInt();
 			course.SList.push_back(s);
@@ -642,13 +643,12 @@ void CourseManage::Init() {
 	}
 }
 
-set<stack<Course>>CourseManage::getSchedule() {
+set<stack<Course>>CourseManage::getSchedule(bool mode) {
 	Init();
 	TimeTable.clear();
 	MaxCount = 0;
 	set<Course>::iterator it = CourseSet.begin();
-	Search(it);
-	qDebug() << "aaa6";
+	Search(mode, it);
 	return TimeTable;
 }
 
@@ -691,32 +691,43 @@ void CourseManage::Connect(QString qs, QString qs_2) {
 	}
 }
 
-void CourseManage::Search(set<Course>::iterator it) {
-	qDebug() << "aaa2";
+void CourseManage::Search(bool mode, set<Course>::iterator it) {
+
 	if (it == CourseSet.end()) {
-		qDebug() << "aaa9";
 		TimeTable.insert(Temp);
-		qDebug() << "aaa111";
 		int s = Temp.size();
-		qDebug() << "aaa11";
 		MaxCount = max(MaxCount, s);
-		qDebug() << "aaa1";
 		return;
 	}
 	else {
-		set<Course>sc = getSubstance(it->JWID);
-		qDebug() << sc.size();
-		it++;
-		Search(it);
-		for (set<Course>::iterator it_2 = sc.begin();it_2 != sc.end();it_2++) {
-			qDebug() << it_2->JWID;
-			if (ScheduleCheck(*it_2) && it_2->TPWQS != "Null") {
-				qDebug() << "aaa5";
-				AddToSchedule(*it_2, 1);
-				Temp.push(*it_2);
-				Search(it);
+		if (mode) {
+			set<Course>sc = getSubstance(it->JWID);
+			it++;
+			Search(1, it);
+			for (set<Course>::iterator it_2 = sc.begin();it_2 != sc.end();it_2++) {
+				if (ScheduleCheck(*it_2) && it_2->TPWQS != "Null") {
+					AddToSchedule(*it_2, 1);
+					Temp.push(*it_2);
+					Search(1, it);
+					Temp.pop();
+					AddToSchedule(*it_2, 0);
+				}
+			}
+		}
+		else {
+			set<Course>::iterator it_2 = it;
+			if (ScheduleCheck(*it)) {
+				AddToSchedule(*it, 1);
+				Temp.push(*it);
+				it++;
+				Search(0, it);
 				Temp.pop();
 				AddToSchedule(*it_2, 0);
+				Search(0, it);
+			}
+			else {
+				it++;
+				Search(0, it);
 			}
 		}
 	}

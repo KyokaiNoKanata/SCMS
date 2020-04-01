@@ -95,38 +95,45 @@
       <string>详细信息</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="4" column="0">
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="text">
-         <string>修改信息</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>查看详情</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>退出</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
+      <item row="2" column="1">
        <widget class="QPushButton" name="pushButton_6">
         <property name="text">
          <string>添加课程</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="3" column="1">
        <widget class="QPushButton" name="pushButton_5">
         <property name="text">
          <string>删除课程</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="text">
+         <string>修改信息</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>查看详情</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>退出</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>刷新</string>
         </property>
        </widget>
       </item>
@@ -186,20 +193,6 @@
           <string>内容</string>
          </property>
         </column>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>刷新</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="pushButton_7">
-        <property name="text">
-         <string>添加关联</string>
-        </property>
        </widget>
       </item>
      </layout>
@@ -302,22 +295,6 @@
     <hint type="destinationlabel">
      <x>631</x>
      <y>250</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_7</sender>
-   <signal>clicked()</signal>
-   <receiver>AdminCourseListWidgetClass</receiver>
-   <slot>AddConnect()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>742</x>
-     <y>270</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>822</x>
-     <y>264</y>
     </hint>
    </hints>
   </connection>
