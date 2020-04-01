@@ -28,6 +28,9 @@ void ViewScheduleWidget::Next() {
 	}
 	else {
 		ui.tableWidget->clear();
+		QStringList qsl;
+		qsl << QString::fromLocal8Bit("周一") << QString::fromLocal8Bit("周二") << QString::fromLocal8Bit("周三") << QString::fromLocal8Bit("周四") << QString::fromLocal8Bit("周五") << QString::fromLocal8Bit("周六") << QString::fromLocal8Bit("周日");
+		ui.tableWidget->setHorizontalHeaderLabels(qsl);
 		stack<Course>sc = *it;
 		while (!sc.empty()) {
 			Course course = sc.top();

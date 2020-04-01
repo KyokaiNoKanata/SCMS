@@ -120,9 +120,10 @@ void AdminCourseListWidget::NVerifiedInfo() {
 	ui.tableWidget_2->setItem(3, 0, new QTableWidgetItem(course.MaxNumber));
 	ui.tableWidget_2->setItem(4, 0, new QTableWidgetItem(course.CurrentNumber));
 	ui.tableWidget_2->setItem(5, 0, new QTableWidgetItem(course.Type));
-	ui.tableWidget_2->setItem(6, 0, new QTableWidgetItem(course.AssistantQS));
-	ui.tableWidget_2->setItem(7, 0, new QTableWidgetItem(course.getMember()));
+	ui.tableWidget_2->setItem(6, 0, new QTableWidgetItem(course.AssistantQS.replace(',', '\n')));
+	ui.tableWidget_2->setItem(7, 0, new QTableWidgetItem(course.getMember().replace(',', '\n')));
 	ui.tableWidget_2->resizeColumnsToContents();
+	ui.tableWidget_2->resizeRowsToContents();
 }
 
 void AdminCourseListWidget::JWVerifiedInfo() {
@@ -141,10 +142,11 @@ void AdminCourseListWidget::JWVerifiedInfo() {
 	ui.tableWidget_2->setItem(5, 0, new QTableWidgetItem(course.Hour));
 	ui.tableWidget_2->setItem(6, 0, new QTableWidgetItem(course.Campus));
 	ui.tableWidget_2->setItem(7, 0, new QTableWidgetItem(course.Teacher));
-	ui.tableWidget_2->setItem(8, 0, new QTableWidgetItem(course.TPWQS));
-	ui.tableWidget_2->setItem(9, 0, new QTableWidgetItem(course.AssistantQS));
-	ui.tableWidget_2->setItem(10, 0, new QTableWidgetItem(course.getMember()));
+	ui.tableWidget_2->setItem(8, 0, new QTableWidgetItem(course.TPWQS.mid(0, course.TPWQS.size() - 1).replace(';', '\n')));
+	ui.tableWidget_2->setItem(9, 0, new QTableWidgetItem(course.AssistantQS.replace(',', '\n')));
+	ui.tableWidget_2->setItem(10, 0, new QTableWidgetItem(course.getMember().replace(',', '\n')));
 	ui.tableWidget_2->resizeColumnsToContents();
+	ui.tableWidget_2->resizeRowsToContents();
 }
 
 void AdminCourseListWidget::AddConnect() {

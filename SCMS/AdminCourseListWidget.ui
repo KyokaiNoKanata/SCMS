@@ -11,9 +11,118 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>课程管理</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>详细信息</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="text">
+         <string>添加课程</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="text">
+         <string>修改信息</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="text">
+         <string>删除课程</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="2">
+       <widget class="QTableWidget" name="tableWidget_2">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
+        </property>
+        <row>
+         <property name="text">
+          <string>课程编号</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>课程名</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>任课教师</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>最大人数</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>已选人数</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>课程类型</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>助教</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>已选学生</string>
+         </property>
+        </row>
+        <column>
+         <property name="text">
+          <string>内容</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>刷新</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>查看详情</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>退出</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
@@ -82,115 +191,6 @@
         <column>
          <property name="text">
           <string>助教</string>
-         </property>
-        </column>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>详细信息</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="2" column="1">
-       <widget class="QPushButton" name="pushButton_6">
-        <property name="text">
-         <string>添加课程</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QPushButton" name="pushButton_5">
-        <property name="text">
-         <string>删除课程</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="text">
-         <string>修改信息</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>查看详情</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>退出</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>刷新</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="2">
-       <widget class="QTableWidget" name="tableWidget_2">
-        <property name="editTriggers">
-         <set>QAbstractItemView::NoEditTriggers</set>
-        </property>
-        <property name="alternatingRowColors">
-         <bool>true</bool>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::NoSelection</enum>
-        </property>
-        <row>
-         <property name="text">
-          <string>课程编号</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>课程名</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>任课教师</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>最大人数</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>已选人数</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>课程类型</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>助教</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>已选学生</string>
-         </property>
-        </row>
-        <column>
-         <property name="text">
-          <string>内容</string>
          </property>
         </column>
        </widget>
@@ -308,6 +308,5 @@
   <slot>SelectAssistant()</slot>
   <slot>Exit()</slot>
   <slot>InputCourse()</slot>
-  <slot>AddConnect()</slot>
  </slots>
 </ui>
